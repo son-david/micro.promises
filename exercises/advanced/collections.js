@@ -59,10 +59,24 @@ var asyncLib = require('../../lib/asyncLib.js');
   */
 
 var fs = require('fs');
+Promise.promisifyAll(fs);
 
 var combineFirstLineOfManyFiles = function (filePaths, writePath) {
  // YOUR CODE HERE
+  return Promise.all(new Promise function(resolve, reject)
+    var temp = [];
+    filePaths.forEach(function(each){
+      temp.push(fs.readFileAsync(each, function(err, data){
+        if (err) {reject(err)}
+        else {
+          console.log('yea');
+        }
+      }));
+    });
+    resolve(temp); 
+    );
 };
+
 
 // Export these functions so we can unit test them
 module.exports = {
