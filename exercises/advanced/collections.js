@@ -63,18 +63,18 @@ Promise.promisifyAll(fs);
 
 var combineFirstLineOfManyFiles = function (filePaths, writePath) {
  // YOUR CODE HERE
-  return Promise.all(new Promise function(resolve, reject)
-    var temp = [];
-    filePaths.forEach(function(each){
-      temp.push(fs.readFileAsync(each, function(err, data){
-        if (err) {reject(err)}
-        else {
-          console.log('yea');
-        }
-      }));
-    });
-    resolve(temp); 
-    );
+  // return Promise.all(new Promise function(resolve, reject)
+  //   var temp = [];
+  //   filePaths.forEach(function(each){
+  //     temp.push(fs.readFileAsync(each, function(err, data){
+  //       if (err) {reject(err)}
+  //       else {
+  //         console.log('yea');
+  //       }
+  //     }));
+  //   });
+  //   resolve(temp); 
+  //   );
 };
 
 
