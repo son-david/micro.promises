@@ -79,14 +79,14 @@ var addNewUserToDatabaseAsync = function(user) {
 // Uncomment the lines below and run the example with `node exercises/bare_minimum/chaining.js`
 // It will succeed most of the time, but fail occasionally to demonstrate error handling
 
-// addNewUserToDatabaseAsync({ name: 'Dan', password: 'chickennuggets' })
-//   .then(function(savedUser) {
-//     console.log('All done!')
-//   })
-//   .catch(function(err) {
-//     // Will catch any promise rejections or thrown errors in the chain!
-//     console.log('Oops, caught an error: ', err.message)
-//   });
+addNewUserToDatabaseAsync({ name: 'Dan', password: 'chickennuggets' })
+  .then(function(savedUser) {
+    console.log('All done!')
+  })
+  .catch(function(err) {
+    // Will catch any promise rejections or thrown errors in the chain!
+    console.log('Oops, caught an error: ', err.message)
+  });
 
 /******************************************************************
  *                         Exercises                              *
@@ -106,6 +106,30 @@ var getGitHubProfileAsync = require('./promisification').getGitHubProfileAsync
 
 var fetchProfileAndWriteToFile = function(readFilePath, writeFilePath) {
   // TODO
+
+  return pluckFirstLineFromFileAsync(readFilePath)
+    .then(function(line) {
+      if (line) {
+        return line;
+      } else {
+        throw new Error('no user');
+      }
+    })
+    .then(function(user){
+      return getGitHubProfileAsync(user);
+    })
+    .then(function(response){
+      return new Promise(function(resolve, reject){
+        fs.writeFile(writeFilePath, JSON.stringify(response), function(err){
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        })
+      });
+    });
+
 };
 
 module.exports = {

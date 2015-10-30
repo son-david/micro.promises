@@ -58,6 +58,8 @@ var asyncLib = require('../../lib/asyncLib.js');
   *   })
   */
 
+var fs = require('fs');
+
 var combineFirstLineOfManyFiles = function (filePaths, writePath) {
  // YOUR CODE HERE
 };
